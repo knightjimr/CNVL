@@ -10,6 +10,7 @@ The software consists of a main bash script CNVL, along with additional code fil
 * python 2.7.11, with the numpy package installed
 * R 3.2.3, with the DNAcopy library installed
 * samtools 1.8
+
 It is likely that similar versions of each of these tools will be compatible, but that has not been tested.
 
 The following steps will setup the software for use on a system:
@@ -25,8 +26,8 @@ was aligned to the hs37d5 human reference using GATK 3 best practices, and the R
 the target regions (the bed file for these regions are included in the repository).  Exome kit target regions can
 also be used as the targets for the software.
 
-The software expects that the tumor and normal bam files were generated using GATK best practices, and the human
-reference fasta file used to generate the reference must be available.  Also, the "tumor purity" of the tumor sample
+The software expects that the tumor and normal bam files were generated using GATK best practices, and that the human
+reference fasta file used to generate the reference is available.  Also, the "tumor purity" of the tumor sample
 must be estimated prior to using the software, as it is one of the arguments to the CNVL command.
 
 The CNVL command is the following:
