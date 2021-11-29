@@ -3,6 +3,8 @@ This repository holds the somatic copy number variant caller computation used in
 
 Farshidfar, et. al.  Integrative Molecular and Clinical Profiling of Acral Melanoma Identifies LZTR1 as a Key Tumor Promoter and Therapeutic Target.  https://www.biorxiv.org/content/10.1101/2021.04.20.440286v1
 
+### Installation/Setup
+
 The software consists of a main bash script CNVL, along with additional code files that were run in the following environment:
 * g++ 10.2.0 compiler
 * python 2.7.11, with the numpy package installed
