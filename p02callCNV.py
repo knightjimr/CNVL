@@ -10,6 +10,10 @@ def main():
         ploidy = float(sys.argv[1])
         purity = float(sys.argv[2])
 
+        if purity < 0.0 or purity > 1.0:
+            sys.stderr.write("Error:  Invalid purity, must be fraction between 0.0 and 1.0:  %s\n" % (sys.argv[2]))
+            sys.exit(-1)
+
         if ploidy == 0.5:
             if purity >= 0.8:
                 pass
@@ -44,8 +48,8 @@ def main():
     outfp = open(outfile, "w")
     fullfp = open(fullfile, "w")
 
-    outfp.write("sampleId\tchr\tstart\tend\tlength\t# markers\tmeanLogR\tgainloss\n")
-    fullfp.write("sampleId\tchr\tstart\tend\tlength\t# markers\tmeanLogR\tgainloss\n")
+    outfp.write("chr\tstart\tend\tlength\t# markers\tcopy_ratio\tcopy_count\tgainloss\n")
+    fullfp.write("chr\tstart\tend\tlength\t# markers\tcopy_ratio\tcopy_count\tgainloss\n")
 
     i = 0
     while i < len(regions):
@@ -70,7 +74,7 @@ def main():
             cnt += regions[x][4]
             total += regions[x][4] * regions[x][5]
 
-        avg = total / cnt
+        ratio = total / cnt
 
         if step > 2:
             gainloss = "gain"
@@ -79,11 +83,11 @@ def main():
         else:
             gainloss = "copy-neutral"
 
-        fullfp.write("%s\t%s\t%d\t%d\t%d\t%d\t%.3f\t%s\n" % \
-                     (sampleName, chr, start, end, (end - start + 1), cnt, avg, gainloss))
+        fullfp.write("%s\t%d\t%d\t%d\t%d\t%.3f\t%d\t%s\n" % \
+                     (chr, start, end, (end - start + 1), cnt, ratio, step, gainloss))
         if step != 2:
-            outfp.write("%s\t%s\t%d\t%d\t%d\t%d\t%.3f\t%s\n" % \
-                        (sampleName, chr, start, end, (end - start + 1), cnt, avg, gainloss))
+            outfp.write("%s\t%d\t%d\t%d\t%d\t%.3f\t%d\t%s\n" % \
+                        (chr, start, end, (end - start + 1), cnt, ratio, step, gainloss))
 
         i = j
     outfp.close()

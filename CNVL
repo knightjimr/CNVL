@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e 
+
+if [ $# -ne 6 ] ; then
+   echo "Usage:  CNVL ref.fasta targets.bed tumor.bam normal.bam purity outputPrefix"
+   exit -1
+fi
+
+CNVLROOT="`dirname \"$0\"`"
+
+REF=$1
+BEDFILE=$2
+TUMOR=$3
+NORMAL=$4
+PURITY=$5
+PREFIX=$6
+
+echo "Reading tumor bam file..."
+
+$CNVLROOT/bamMetrics -b $BEDFILE -r $REF -o ${PREFIX}_tumorMetrics.txt -c ${PREFIX}_tumorCov.txt $TUMOR
+
+echo "Reading normal bam file..."
+
+$CNVLROOT/bamMetrics -b $BEDFILE -r $REF -o ${PREFIX}_normalMetrics.txt -c ${PREFIX}_normalCov.txt $NORMAL
+
+echo "Performing CNV calling..."
+
+python $CNVLROOT/makeCovRatio.py 1.0 1.0 ${PREFIX}_tumorCov.txt ${PREFIX}_tumorMetrics.txt \
+    ${PREFIX}_normalCov.txt ${PREFIX}_normalMetrics.txt ${PREFIX}_covRatio.txt
+
+Rscript $CNVLROOT/p01CNV_segmentation.R $PREFIX
+
+python $CNVLROOT/p01CNV_segmentation.py ${PREFIX}_covRatio.breakpoint.txt ${PREFIX}_covRatio.chall.txt $PREFIX
+
+rm -f ${PREFIX}_covRatio.breakpoint.txt ${PREFIX}_covRatio.chall.txt
+
+python $CNVLROOT/p02callCNV.py 0.5 $PURITY No-op ${PREFIX}_CBS_calling.txt ${PREFIX}.calls.txt ${PREFIX}_cnvfull.txt
