@@ -3,6 +3,8 @@ This repository holds the somatic copy number variant caller computation used in
 
 Farshidfar, et. al.  Integrative Molecular and Clinical Profiling of Acral Melanoma Identifies LZTR1 as a Key Tumor Promoter and Therapeutic Target.  https://www.biorxiv.org/content/10.1101/2021.04.20.440286v1
 
+This caller was adapted from the computation used in [1] in 2013, developed by Siming Zhao and Murim Choi, and the original implementation of the p01CNV_segmentation code was developed by Siming Zhao in 2013. The computation has also been used in [2], [3], [4] and [5].
+
 ### Installation/Setup
 
 The software consists of a main bash script CNVL, along with additional code files that were run in the following environment:
@@ -56,5 +58,14 @@ The software also generates intermediate files used by the computation, that can
 * prefix_CBS_calling.txt - Raw results from the DNAcopy CBS computation
 * prefix_cnvfull.txt - Final results for each of the CBS identified regions, including regions identified as copy-neutral
 
+#### References
 
+[1]  Zhao S, et al.  Landscape of somatic single-nucleotide and copy-number mutations in uterine serous carcinoma.  Proc. Natl. Acad. Sci. U. S. A. 110, 2916–2921 (2013).
 
+[2] Zhao S, et al.  Mutational landscape of uterine and ovarian carcinosarcomas implicates histone genes in epithelial-mesenchymal transition.  Proc Natl Acad Sci U S A. 2016 Oct 25;113(43):12238-12243.
+
+[3] Bi M, et al.  Genomic characterization of sarcomatoid transformation in clear cell renal cell carcinoma.  Proc Natl Acad Sci U S A. 2016 Feb 23;113(8):2170-5.
+ 
+[4] Zhao S, et al.  Mutational landscape of uterine and ovarian carcinosarcomas implicates histone genes in epithelial-mesenchymal transition.  Proc Natl Acad Sci U S A. 2016 Oct 25;113(43):12238-12243.
+ 
+[5] Choi J, et al.  Integrated mutational landscape analysis of uterine leiomyosarcomas.  Proc Natl Acad Sci U S A. 2021 Apr 13;118(15):e2025182118.
