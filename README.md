@@ -1,7 +1,7 @@
 # CNVL
 This repository holds the somatic copy number variant caller computation used in the research and generation of the following manuscript:
 
-Farshidfar, et. al.  Integrative Molecular and Clinical Profiling of Acral Melanoma Identifies LZTR1 as a Key Tumor Promoter and Therapeutic Target.  https://www.biorxiv.org/content/10.1101/2021.04.20.440286v1
+Farshidfar, et. al.  Integrative Molecular and Clinical Profiling of Acral Melanoma Identifies LZTR1 as a Key Tumor Promoter and Therapeutic Target.  https://www.nature.com/articles/s41467-022-28566-4
 
 This caller was adapted from the computation used in [1] in 2013, developed by Siming Zhao and Murim Choi, and the original implementation of the p01CNV_segmentation code was developed by Siming Zhao in 2013. The computation has also been used in [2], [3], [4] and [5].
 
